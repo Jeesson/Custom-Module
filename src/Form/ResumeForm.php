@@ -14,47 +14,51 @@ class ResumeForm extends FormBase {
     return 'resume_form';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
-    $form['first_name'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Your First name:'),
-      '#required' => TRUE,
-    );
+  public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['last_name'] = array(
+    $form['first_name'] = [
       '#type' => 'textfield',
-      '#title' => t('Your Last name:'),
+      '#title' => $this->t('Your First name:'),
       '#required' => TRUE,
-    );
+    ];
 
-    $form['email'] = array(
+    $form['last_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Your Last name:'),
+      '#required' => TRUE,
+    ];
+
+    $form['email'] = [
       '#type' => 'email',
-      '#title' => t('Email:'),
+      '#title' => $this->t('Email:'),
       '#required' => TRUE,
-    );
-    $form['description'] = array (
+    ];
+
+    $form['description'] = [
       '#type' => 'textarea',
-      '#title' => t('Small description:'),
-    );
-    $form['candidate_dob'] = array (
+      '#title' => $this->t('Small description:'),
+    ];
+
+    $form['candidate_dob'] = [
       '#type' => 'date',
-      '#title' => t('DOB'),
-      '#required' => false,
-    );
-    $form['candidate_gender'] = array (
+      '#title' => $this->t('DOB'),
+      '#required' => FALSE,
+    ];
+
+    $form['candidate_gender'] = [
       '#type' => 'select',
       '#title' => ('Gender'),
-      '#options' => array(
-        'Male' => t('Male'),
-        'Female' => t('Female'),
-      ),
-    );
-    $form['actions']['submit'] = array(
+      '#options' => [
+        'Male' => $this->t('Male'),
+        'Female' => $this->t('Female'),
+      ],
+    ];
+
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Отправить'),
       '#button_type' => 'primary',
-    );
+    ];
     return $form;
   }
 
@@ -84,13 +88,12 @@ class ResumeForm extends FormBase {
 
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $messenger = $this->messenger();
     foreach ($form_state->getValues() as $key => $value) {
-      $this->messenger()->addWarning($this->t($key . ': ' .$value));
+      $messenger->addWarning($key . ': ' .$value);
     }
-    $this->messenger()->addMessage($this->t("Форма успешно отправленна!"));
-
+    $messenger->addMessage($this->t("Форма успешно отправленна!"));
   }
 
 }
