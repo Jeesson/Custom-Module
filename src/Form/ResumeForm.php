@@ -95,5 +95,4 @@ class ResumeForm extends FormBase {
     }
     $messenger->addMessage($this->t("Форма успешно отправленна!"));
   }
-
 }
