@@ -1,0 +1,12 @@
+# Define default links for this module.
+resume.form:
+  title: Resume Form
+  description: Resume Form Module - form to enter user details!.
+  route_name: resume.form
+  expanded: TRUE
+
+resume.description:
+  title: Resume Form Description
+  description: Resume Form Module - form to enter user details!.
+  route_name: resume.description
+  parent: resume.form

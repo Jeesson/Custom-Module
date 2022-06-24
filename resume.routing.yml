@@ -1,0 +1,22 @@
+# Первым делом объявляется машинное имя роута. Оно составляетсям из:
+# название_модуля.машинное_название_роута.
+resume.form:
+  # Указываем путь роута, с лидирующим слешем.
+  path: 'resume/form'
+  # Значения по умолчанию
+  defaults:
+    # Функция контроллера отвечающая за содержимое.
+    _title: 'Application form'
+    _form: '\Drupal\resume\Form\ResumeForm'
+  # В данном разделе указываются необходимые требования для роута.
+  requirements:
+    # Мы будем показывать страницу только тем, у кого есть права на просмотр
+    # содержимого.
+    _permission: 'access content'
+
+resume.description:
+  path: 'resume/description'
+  defaults:
+    _title: 'Application form'
+    requirements:
+      _permission: 'access content'
