@@ -20,19 +20,19 @@ function resume_install() {
     [
       'first_name' => 'John',
       'last_name' => 'Doe',
-      'email' => 'example@mail.com',
+      'email' => 'example@gmail.com',
       'gender' => 'Male',
       'dob' => '1999-05-24',
-      'description' => 'Test user 1',
+      'description' => 'Test user',
     ],
     [
+      'uid' => 1,
       'first_name' => 'Pavel',
       'last_name' => 'Saulin',
-      'email' => 'example@mail.com',
+      'email' => 'test@gmail.com',
       'gender' => 'Male',
       'dob' => '1999-05-24',
-      'description' => 'Test user 2',
-      'uid' => 1,
+      'description' => 'Test user',
     ],
   ];
 

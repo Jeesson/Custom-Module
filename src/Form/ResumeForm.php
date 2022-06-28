@@ -96,6 +96,7 @@ class ResumeForm extends FormBase {
     $messenger->addMessage($this->t("Форма успешно отправленна!"));
 
     $field = $form_state->getValues();
+    $uid = random_int(0,999);
     $first_name = $field['first_name'];
     $last_name = $field['last_name'];
     $email = $field['email'];
@@ -103,6 +104,7 @@ class ResumeForm extends FormBase {
     $gender = $field['candidate_gender'];
     $age = $field['candidate_dob'];
     $field_arr = [
+      'uid' => $uid,
       'first_name' => $first_name,
       'last_name' => $last_name,
       'email' => $email,
@@ -114,6 +116,6 @@ class ResumeForm extends FormBase {
     $query->insert('resume')
       ->fields($field_arr)
       ->execute();
-    $messenger->addMessage($this->t("Data successfully saved"));
+    $messenger->addMessage($this->t("Данные успешно сохранены!"));
   }
 }
