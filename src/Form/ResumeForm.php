@@ -94,5 +94,26 @@ class ResumeForm extends FormBase {
       $messenger->addWarning($key . ': ' .$value);
     }
     $messenger->addMessage($this->t("Форма успешно отправленна!"));
+
+    $field = $form_state->getValues();
+    $first_name = $field['first_name'];
+    $last_name = $field['last_name'];
+    $email = $field['email'];
+    $description = $field['description'];
+    $gender = $field['candidate_gender'];
+    $age = $field['candidate_dob'];
+    $field_arr = [
+      'first_name' => $first_name,
+      'last_name' => $last_name,
+      'email' => $email,
+      'description' => $description,
+      'gender' => $gender,
+      'dob' => $age,
+    ];
+    $query = \Drupal::database();
+    $query->insert('resume')
+      ->fields($field_arr)
+      ->execute();
+    $messenger->addMessage($this->t("Data successfully saved"));
   }
 }

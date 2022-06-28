@@ -1,0 +1,121 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the dbtng_example module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Creates some default entries on this module custom table.
+ *
+ * @see hook_install()
+ *
+ * @ingroup dbtng_example
+ */
+function resume_install() {
+  // Insert some example data into our schema.
+  $entries = [
+    [
+      'first_name' => 'John',
+      'last_name' => 'Doe',
+      'email' => 'example@mail.com',
+      'gender' => 'Male',
+      'dob' => '1999-05-24',
+      'description' => 'Test user 1',
+    ],
+    [
+      'first_name' => 'Pavel',
+      'last_name' => 'Saulin',
+      'email' => 'example@mail.com',
+      'gender' => 'Male',
+      'dob' => '1999-05-24',
+      'description' => 'Test user 2',
+      'uid' => 1,
+    ],
+  ];
+
+  $connection = \Drupal::database();
+  foreach ($entries as $entry) {
+    $connection->insert('resume')->fields($entry)->execute();
+  }
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup dbtng_example
+ */
+function resume_schema() {
+  $schema['resume'] = [
+    'description' => 'Stores example person entries for demonstration purposes.',
+    'fields' => [
+      'pid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique person ID.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Creator user's {users}.uid",
+      ],
+      'first_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of the person.',
+      ],
+      'last_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Surname of the person.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Email of the person.',
+      ],
+      'description' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Description of the person.',
+      ],
+      'gender' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Gender of the person.',
+      ],
+      'dob' => [
+        'type' => 'varchar',
+        'not null' => FALSE,
+        'default' => '2000-01-01',
+        'length' => 255,
+        'description' => 'The age of the person in years.',
+      ],
+    ],
+    'primary key' => ['pid'],
+    'indexes' => [
+      'name' => ['first_name'],
+      'surname' => ['last_name'],
+      'age' => ['dob'],
+    ],
+  ];
+
+  return $schema;
+}
