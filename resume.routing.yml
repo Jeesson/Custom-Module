@@ -2,7 +2,7 @@
 # название_модуля.машинное_название_роута.
 resume.form:
   # Указываем путь роута, с лидирующим слешем.
-  path: 'resume/form'
+  path: 'resume-form'
   # Значения по умолчанию
   defaults:
     # Функция контроллера отвечающая за содержимое.
@@ -15,9 +15,9 @@ resume.form:
     _permission: 'access content'
 
 resume.description:
-  path: 'resume/description'
+  path: 'resume-description'
   defaults:
     _controller: '\Drupal\resume\Controller\ResumeFormController::index'
     _title: 'Resume form controller'
-    requirements:
-      _permission: 'access content'
+  requirements:
+    _permission: 'access content'
