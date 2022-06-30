@@ -17,6 +17,7 @@ resume.form:
 resume.description:
   path: 'resume/description'
   defaults:
-    _title: 'Application form'
+    _controller: '\Drupal\resume\Controller\ResumeFormController::index'
+    _title: 'Resume form controller'
     requirements:
       _permission: 'access content'

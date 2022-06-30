@@ -4,9 +4,34 @@
  * Contains \Drupal\resume\Form\ResumeForm.
  */
 namespace Drupal\resume\Form;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class ResumeForm extends FormBase {
+
+  protected $connection;
+
+  /**
+   * Constructs a new DblogClearLogConfirmForm.
+   *
+   * @param \Drupal\Core\Database\Connection $connection
+   *   The database connection.
+   */
+  public function __construct(Connection $connection) {
+    $this->connection = $connection;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database')
+    );
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -112,7 +137,8 @@ class ResumeForm extends FormBase {
       'gender' => $gender,
       'dob' => $age,
     ];
-    $query = \Drupal::database();
+
+    $query = $this->connection;
     $query->insert('resume')
       ->fields($field_arr)
       ->execute();
