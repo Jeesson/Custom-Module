@@ -2,6 +2,8 @@
 namespace Drupal\resume\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ResumeFormController
@@ -9,13 +11,34 @@ use Drupal\Component\Render\FormattableMarkup;
  */
 class ResumeFormController extends ControllerBase {
 
+  protected $connection;
+
+  /**
+   * Constructs a new DblogClearLogConfirmForm.
+   *
+   * @param \Drupal\Core\Database\Connection $connection
+   *   The database connection.
+   */
+  public function __construct(Connection $connection) {
+    $this->connection = $connection;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database')
+    );
+  }
+
   /**
    * @return array
    */
   public function index() {
 
     $field_arr = ['uid', 'first_name', 'last_name', 'email', 'description', 'gender', 'dob'];
-    $database = \Drupal::database();
+    $database = $this->connection;
     $query = $database->select('resume', 'r')
       ->fields('r', $field_arr)
       ->execute()->fetchAll();
@@ -33,13 +56,13 @@ class ResumeFormController extends ControllerBase {
     }
 
     $header = [
-      'col0' => t('uid'),
-      'col1' => t('fname'),
-      'col2' => t('sname'),
-      'col3' => t('email'),
-      'col4' => t('description'),
-      'col5' => t('gender'),
-      'col6' => t('dob'),
+      'col0' => t('Uid'),
+      'col1' => t('Name'),
+      'col2' => t('Surname'),
+      'col3' => t('Email'),
+      'col4' => t('Description'),
+      'col5' => t('Gender'),
+      'col6' => t('DOB'),
     ];
 
     $rows = [
@@ -52,10 +75,12 @@ class ResumeFormController extends ControllerBase {
       [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
 
     ];
+
     return [
       '#type' => 'table',
       '#header' => $header,
       '#rows' => $data,
+      '#sticky' => TRUE,
     ];
 
   }

@@ -14,8 +14,6 @@ class ResumeForm extends FormBase {
   protected $connection;
 
   /**
-   * Constructs a new DblogClearLogConfirmForm.
-   *
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection.
    */
@@ -67,6 +65,7 @@ class ResumeForm extends FormBase {
     $form['candidate_dob'] = [
       '#type' => 'date',
       '#title' => $this->t('DOB'),
+      '#default_value' => date('Y-m-d'),
       '#required' => FALSE,
     ];
 
@@ -118,7 +117,7 @@ class ResumeForm extends FormBase {
     foreach ($form_state->getValues() as $key => $value) {
       $messenger->addWarning($key . ': ' .$value);
     }
-    $messenger->addMessage($this->t("Форма успешно отправленна!"));
+    $messenger->addMessage($this->t("Форма прошла валидацию!"));
 
     $field = $form_state->getValues();
     $uid = random_int(0,999);
@@ -138,10 +137,15 @@ class ResumeForm extends FormBase {
       'dob' => $age,
     ];
 
-    $query = $this->connection;
-    $query->insert('resume')
-      ->fields($field_arr)
-      ->execute();
-    $messenger->addMessage($this->t("Данные успешно сохранены!"));
+    if (\Drupal::currentUser()->hasPermission('access resume-table')) {
+      $query = $this->connection;
+      $query->insert('resume')
+        ->fields($field_arr)
+        ->execute();
+      $messenger->addMessage($this->t("Данные успешно сохранены!"));
+    } else {
+      $messenger->addError('Не авторизованным челиксам доступ закрыт, ты как сюда попал?!');
+    }
+
   }
 }

@@ -88,8 +88,7 @@ function resume_schema() {
         'description' => 'Email of the person.',
       ],
       'description' => [
-        'type' => 'varchar',
-        'length' => 255,
+        'type' => 'blob',
         'not null' => TRUE,
         'default' => '',
         'description' => 'Description of the person.',

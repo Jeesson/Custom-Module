@@ -1,0 +1,7 @@
+access resume-form:
+  title: 'Access form page'
+  description: 'Some description'
+
+access resume-table:
+  title: 'Access form table'
+  description: 'Some description'

@@ -6,18 +6,18 @@ resume.form:
   # Значения по умолчанию
   defaults:
     # Функция контроллера отвечающая за содержимое.
-    _title: 'Application form'
+    _title: 'Resume form'
     _form: '\Drupal\resume\Form\ResumeForm'
   # В данном разделе указываются необходимые требования для роута.
   requirements:
     # Мы будем показывать страницу только тем, у кого есть права на просмотр
     # содержимого.
-    _permission: 'access content'
+    _permission: 'access resume-form'
 
 resume.description:
   path: 'resume-description'
   defaults:
+    _title: 'Table from DB'
     _controller: '\Drupal\resume\Controller\ResumeFormController::index'
-    _title: 'Resume form controller'
   requirements:
-    _permission: 'access content'
+    _permission: 'access resume-table'
