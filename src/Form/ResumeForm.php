@@ -117,7 +117,7 @@ class ResumeForm extends FormBase {
     foreach ($form_state->getValues() as $key => $value) {
       $messenger->addWarning($key . ': ' .$value);
     }
-    $messenger->addMessage($this->t("Форма прошла валидацию!"));
+    $messenger->addMessage($this->t("Форма прошла валидацию 🖤"));
 
     $field = $form_state->getValues();
     $uid = random_int(0,999);
@@ -137,15 +137,13 @@ class ResumeForm extends FormBase {
       'dob' => $age,
     ];
 
-    if (\Drupal::currentUser()->hasPermission('access resume-table')) {
+    if (\Drupal::currentUser()->hasPermission('access resume-form')) {
       $query = $this->connection;
       $query->insert('resume')
         ->fields($field_arr)
         ->execute();
-      $messenger->addMessage($this->t("Данные успешно сохранены!"));
-    } else {
-      $messenger->addError('Не авторизованным челиксам доступ закрыт, ты как сюда попал?!');
-    }
+      $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
+    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
 
   }
 }
