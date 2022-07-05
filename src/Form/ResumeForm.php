@@ -4,6 +4,10 @@
  * Contains \Drupal\resume\Form\ResumeForm.
  */
 namespace Drupal\resume\Form;
+// Use for Ajax.
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
+
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -82,9 +86,32 @@ class ResumeForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Отправить'),
       '#button_type' => 'primary',
+//      '#ajax' => [
+//        'callback' => '::setMessage',
+//      ],
     ];
+
+    // Placeholder to put the result of Ajax call, setMessage().
+    $form['message'] = [
+      '#type' => 'markup',
+      '#markup' => '<div class="result_message"></div>',
+    ];
+    // Asset library.
+    $form['#attached']['library'][] = 'resume/resume-asset';
+
     return $form;
   }
+
+//  public function setMessage(array $form, FormStateInterface $form_state) {
+//
+//    $response = new AjaxResponse();
+//    $response->addCommand(
+//      new HtmlCommand(
+//        '.result_message',
+//        '<div class="my_message">Submitted title is ' . $form_state->getValue('first_name') . '</div>')
+//    );
+//    return $response;
+//  }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
 
@@ -137,13 +164,13 @@ class ResumeForm extends FormBase {
       'dob' => $age,
     ];
 
-    if (\Drupal::currentUser()->hasPermission('access resume-form')) {
+//    if (\Drupal::currentUser()->hasPermission('access resume-form')) {
       $query = $this->connection;
       $query->insert('resume')
         ->fields($field_arr)
         ->execute();
       $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
-    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
+//    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
 
   }
 }

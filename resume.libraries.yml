@@ -1,0 +1,12 @@
+resume-asset: # Create library asset name
+  version: 1.x
+  css:
+    theme:
+      css/resume-theme.css: {}
+    layout:
+      css/resume-layout.css: {}
+  js:
+    js/resume.js: {}
+
+  dependencies: # Add core Drupal Ajax library as a dependency for this library.
+    - core/jquery

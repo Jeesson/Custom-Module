@@ -1,0 +1,10 @@
+.result_message {
+  color: red;
+  background-color: rgba(0,0,0,0);
+}
+
+.my_message {
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 2em;
+}

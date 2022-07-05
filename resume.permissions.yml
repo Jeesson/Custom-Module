@@ -3,5 +3,5 @@ access resume-form:
   description: 'Some description'
 
 access resume-table:
-  title: 'Access form table'
+  title: 'Access table page'
   description: 'Some description'
