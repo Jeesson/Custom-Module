@@ -1,66 +1,84 @@
-diff --git a/src/Controller/ResumeFormController.php b/src/Controller/ResumeFormController.php
-index 47545a9..59bbad5 100644
---- a/src/Controller/ResumeFormController.php
-+++ b/src/Controller/ResumeFormController.php
-@@ -65,16 +65,14 @@ class ResumeFormController extends ControllerBase {
-       'col6' => t('DOB'),
-     ];
- 
--    $rows = [
--//      ['uid 1', 'fullname', ['data'=>$value,'colspan' => 2]],
--
--      [['data' => 'trash'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
--
--    ];
-+//    $rows = [
-+//      [['data' => 'trash'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-+//
-+//    ];
- 
-     return [
-       '#type' => 'table',
+diff --git a/some-changes.patch b/some-changes.patch
+index 5c817d0..e69de29 100644
+--- a/some-changes.patch
++++ b/some-changes.patch
+@@ -1,66 +0,0 @@
+-diff --git a/src/Controller/ResumeFormController.php b/src/Controller/ResumeFormController.php
+-index 47545a9..59bbad5 100644
+---- a/src/Controller/ResumeFormController.php
+-+++ b/src/Controller/ResumeFormController.php
+-@@ -65,16 +65,14 @@ class ResumeFormController extends ControllerBase {
+-       'col6' => t('DOB'),
+-     ];
+- 
+--    $rows = [
+--//      ['uid 1', 'fullname', ['data'=>$value,'colspan' => 2]],
+--
+--      [['data' => 'trash'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+--      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+--
+--    ];
+-+//    $rows = [
+-+//      [['data' => 'trash'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+-+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+-+//
+-+//    ];
+- 
+-     return [
+-       '#type' => 'table',
+-diff --git a/src/Form/ResumeForm.php b/src/Form/ResumeForm.php
+-index 3ee7163..49a2094 100644
+---- a/src/Form/ResumeForm.php
+-+++ b/src/Form/ResumeForm.php
+-@@ -64,6 +64,7 @@ class ResumeForm extends FormBase {
+-     $form['description'] = [
+-       '#type' => 'textarea',
+-       '#title' => $this->t('Small description:'),
+-+      '#default_value' => $this->t('Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam.'),
+-     ];
+- 
+-     $form['candidate_dob'] = [
+-@@ -92,10 +93,11 @@ class ResumeForm extends FormBase {
+-     ];
+- 
+-     // Placeholder to put the result of Ajax call, setMessage().
+--    $form['message'] = [
+--      '#type' => 'markup',
+--      '#markup' => '<div class="result_message"></div>',
+--    ];
+-+//    $form['message'] = [
+-+//      '#type' => 'markup',
+-+//      '#markup' => '<div class="result_message"></div>',
+-+//    ];
+-+
+-     // Asset library.
+-     $form['#attached']['library'][] = 'resume/resume-asset';
+- 
+-@@ -169,7 +171,7 @@ class ResumeForm extends FormBase {
+-       $query->insert('resume')
+-         ->fields($field_arr)
+-         ->execute();
+--      $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
+-+      $messenger->addMessage($this->t("Данные успешно сохранены, бяка 🖤"));
+- //    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
+- 
+-   }
 diff --git a/src/Form/ResumeForm.php b/src/Form/ResumeForm.php
-index 3ee7163..49a2094 100644
+index 49a2094..e561701 100644
 --- a/src/Form/ResumeForm.php
 +++ b/src/Form/ResumeForm.php
-@@ -64,6 +64,7 @@ class ResumeForm extends FormBase {
-     $form['description'] = [
-       '#type' => 'textarea',
-       '#title' => $this->t('Small description:'),
-+      '#default_value' => $this->t('Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam.'),
-     ];
- 
-     $form['candidate_dob'] = [
-@@ -92,10 +93,11 @@ class ResumeForm extends FormBase {
-     ];
- 
-     // Placeholder to put the result of Ajax call, setMessage().
--    $form['message'] = [
--      '#type' => 'markup',
--      '#markup' => '<div class="result_message"></div>',
--    ];
-+//    $form['message'] = [
-+//      '#type' => 'markup',
-+//      '#markup' => '<div class="result_message"></div>',
-+//    ];
-+
-     // Asset library.
-     $form['#attached']['library'][] = 'resume/resume-asset';
- 
-@@ -169,7 +171,7 @@ class ResumeForm extends FormBase {
+@@ -171,7 +171,7 @@ class ResumeForm extends FormBase {
        $query->insert('resume')
          ->fields($field_arr)
          ->execute();
--      $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
-+      $messenger->addMessage($this->t("Данные успешно сохранены, бяка 🖤"));
+-      $messenger->addMessage($this->t("Данные успешно сохранены, бяка 🖤"));
++      $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
  //    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
  
    }
