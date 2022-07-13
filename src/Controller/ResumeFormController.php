@@ -65,15 +65,6 @@ class ResumeFormController extends ControllerBase {
       'col6' => t('DOB'),
     ];
 
-//    $rows = [
-//      [['data' => 'trash'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-//
-//    ];
-
     return [
       '#type' => 'table',
       '#header' => $header,
