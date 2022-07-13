@@ -171,7 +171,7 @@ class ResumeForm extends FormBase {
       $query->insert('resume')
         ->fields($field_arr)
         ->execute();
-      $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
+      $messenger->addMessage($this->t("Данные успешно сохранены после патча.. 🖤"));
 //    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
 
   }
