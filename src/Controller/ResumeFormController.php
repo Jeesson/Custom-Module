@@ -65,16 +65,14 @@ class ResumeFormController extends ControllerBase {
       'col6' => t('DOB'),
     ];
 
-    $rows = [
-//      ['uid 1', 'fullname', ['data'=>$value,'colspan' => 2]],
-
-      [['data' => 'trash'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
-
-    ];
+//    $rows = [
+//      [['data' => 'trash'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+//      [['data' => 'uid 1'], ['data' => 'fullname'], ['data' => 'email'], ['data' => 'description'], ['data' => 'gender'], ['data' => 'dob']],
+//
+//    ];
 
     return [
       '#type' => 'table',

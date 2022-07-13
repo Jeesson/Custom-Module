@@ -64,6 +64,7 @@ class ResumeForm extends FormBase {
     $form['description'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Small description:'),
+      '#default_value' => $this->t('Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam.'),
     ];
 
     $form['candidate_dob'] = [
@@ -92,10 +93,11 @@ class ResumeForm extends FormBase {
     ];
 
     // Placeholder to put the result of Ajax call, setMessage().
-    $form['message'] = [
-      '#type' => 'markup',
-      '#markup' => '<div class="result_message"></div>',
-    ];
+//    $form['message'] = [
+//      '#type' => 'markup',
+//      '#markup' => '<div class="result_message"></div>',
+//    ];
+
     // Asset library.
     $form['#attached']['library'][] = 'resume/resume-asset';
 
@@ -169,7 +171,7 @@ class ResumeForm extends FormBase {
       $query->insert('resume')
         ->fields($field_arr)
         ->execute();
-      $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
+      $messenger->addMessage($this->t("Данные успешно сохранены, бяка 🖤"));
 //    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
 
   }
