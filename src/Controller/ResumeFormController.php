@@ -3,6 +3,7 @@ namespace Drupal\resume\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Database\Connection;
+use Laminas\Diactoros\Response\JsonResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -37,32 +38,44 @@ class ResumeFormController extends ControllerBase {
    */
   public function index() {
 
-    $field_arr = ['uid', 'first_name', 'last_name', 'email', 'description', 'gender', 'dob'];
+//    $field_arr = ['uid', 'first_name', 'last_name', 'email', 'description', 'gender', 'dob'];
+    $field_arr = ['pid', 'first_name', 'last_name'];
     $database = $this->connection;
-    $query = $database->select('resume', 'r')
-      ->fields('r', $field_arr)
-      ->execute()->fetchAll();
+    $query = $database->select('resume', 'r');
+    $query->addJoin('INNER','resume_customers', 'c', 'r.pid=c.person_id');
+    $query->fields('r', $field_arr);
+    $query->fields('c', ['person_id', 'order_date', 'customer_role']);
+//    $query->orderBy('order_date');
+    $orders = $query->execute()->fetchAll();
 
-    foreach ($query as $row) {
+    echo('<p>'.json_encode($orders).'</p>');
+
+    foreach ($orders as $row) {
       $data[] = [
-        'uid' => $row->uid,
+        'pid' => $row->pid,
         'first_name' => $row->first_name,
         'last_name' => $row->last_name,
-        'email' => $row->email,
-        'description' => $row->description,
-        'gender' => $row->gender,
-        'dob' => $row->dob,
+//        'email' => $row->email,
+//        'description' => $row->description,
+//        'gender' => $row->gender,
+//        'dob' => $row->dob,
+        'person_id' => $row->person_id,
+        'order_date' => $row->order_date,
+        'customer_role' => $row->customer_role,
       ];
     }
 
     $header = [
-      'col0' => t('Uid'),
+      'col0' => t('pid'),
       'col1' => t('Name'),
       'col2' => t('Surname'),
-      'col3' => t('Email'),
-      'col4' => t('Description'),
-      'col5' => t('Gender'),
-      'col6' => t('DOB'),
+//      'col3' => t('Email'),
+//      'col4' => t('Description'),
+//      'col5' => t('Gender'),
+//      'col6' => t('DOB'),
+      'col7' => t('person_id'),
+      'col8' => t('order_date'),
+      'col9' => t('customer_role'),
     ];
 
     return [
