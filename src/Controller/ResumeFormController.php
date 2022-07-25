@@ -42,9 +42,9 @@ class ResumeFormController extends ControllerBase {
     $field_arr = ['pid', 'first_name', 'last_name'];
     $database = $this->connection;
     $query = $database->select('resume', 'r');
-    $query->addJoin('INNER','resume_customers', 'c', 'r.pid=c.person_id');
+    $query->addJoin('INNER','resume_orders', 'c', 'r.pid=c.personid');
     $query->fields('r', $field_arr);
-    $query->fields('c', ['person_id', 'order_date', 'customer_role']);
+    $query->fields('c', ['orderid', 'order_date', 'role']);
 //    $query->orderBy('order_date');
     $orders = $query->execute()->fetchAll();
 
@@ -59,23 +59,23 @@ class ResumeFormController extends ControllerBase {
 //        'description' => $row->description,
 //        'gender' => $row->gender,
 //        'dob' => $row->dob,
-        'person_id' => $row->person_id,
+        'person_id' => $row->pid,
         'order_date' => $row->order_date,
-        'customer_role' => $row->customer_role,
+        'customer_role' => $row->role,
       ];
     }
 
     $header = [
-      'col0' => t('pid'),
-      'col1' => t('Name'),
-      'col2' => t('Surname'),
-//      'col3' => t('Email'),
-//      'col4' => t('Description'),
-//      'col5' => t('Gender'),
-//      'col6' => t('DOB'),
-      'col7' => t('person_id'),
-      'col8' => t('order_date'),
-      'col9' => t('customer_role'),
+      'col0' => $this->t('pid'),
+      'col1' => $this->t('Name'),
+      'col2' => $this->t('Surname'),
+//      'col3' => $this->t('Email'),
+//      'col4' => $this->t('Description'),
+//      'col5' => $this->t('Gender'),
+//      'col6' => $this->t('DOB'),
+      'col7' => $this->t('person_id'),
+      'col8' => $this->t('order_date'),
+      'col9' => $this->t('customer_role'),
     ];
 
     return [
