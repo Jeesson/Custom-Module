@@ -14,9 +14,11 @@ interface Info {
  */
 class InfoService implements Info {
   private array $random_info = [
-    "InfoService: That's just a Drupal services",
-    "InfoService: Hi, the dev's name is Pavel",
-    "InfoService: Lorem ipsum ha-ha-ha",
+    "<span>InfoService: That's just a Drupal services</span>",
+    "<span>InfoService: Hi, the dev's name is Pavel</span>",
+    "<span>InfoService: Lorem ipsum ha-ha-ha</span>",
+    "<span>InfoService: Hard for me tho</span>",
+    "<span>InfoService: Simple service</span>",
   ];
 
   /**
@@ -45,20 +47,19 @@ class TotallyNews extends InfoDecorator {
     "<span>That's just a Drupal services</span>",
     "<span>Hi, the dev's name is Pavel</span>",
     "<span>Lorem ipsum ha-ha-ha</span>",
+    "<span>Too hard for me</span>",
+    "<span>Simple service</span>",
   ];
 
   public function getRandInfo(): string {
-    // TODO: Implement getRandInfo() method.
     return $this->classname . $this->random_infos[array_rand($this->random_infos)];
   }
 
-  public function getAllInfo() {
-    // TODO: Implement getAllInfo() method.
-    echo $this->classname . implode(', ', $this->random_infos);
+  public function getAllInfo(): string {
+    return $this->classname . join('<span style="color:white !important;">, </span>', $this->random_infos);
   }
 
   public function getSomeInfo(int $num): string {
-    // TODO: Implement getSomeInfo() method.
-    return $this->random_infos[$num];
+    return $this->classname . $this->random_infos[$num] . ' <span style="color:white !important;">['.$num.']</span>';
   }
 }

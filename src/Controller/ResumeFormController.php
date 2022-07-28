@@ -57,7 +57,7 @@ class ResumeFormController extends ControllerBase {
     $orders = $query->execute()->fetchAll();
 
 //    Database data
-    echo ('<p>'.json_encode($orders).'</p>');
+    echo ('<p>'.json_encode($orders).'</p><br>');
 
 
 //    echo ('<p>'.$this->infoService->getRandInfo().'</p>');
