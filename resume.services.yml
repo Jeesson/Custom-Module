@@ -1,0 +1,5 @@
+services:
+  resume.info:
+    class: Drupal\resume\InfoService
+  resume.news:
+    class: Drupal\resume\TotallyNews

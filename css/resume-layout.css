@@ -8,3 +8,24 @@
   padding: 10px 20px;
   font-size: 2em;
 }
+
+table {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  background-color: white;
+}
+td.data, th.header {
+  text-align: center; !important;
+  padding: 8px; !important;
+}
+
+table thead th {
+  color: #ffffff;
+  background: #324960;
+}

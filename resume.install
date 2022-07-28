@@ -1,19 +1,5 @@
 <?php
 
-/**
- * @file
- * Install, update and uninstall functions for the dbtng_example module.
- */
-
-/**
- * Implements hook_install().
- *
- * Creates some default entries on this module custom table.
- *
- * @see hook_install()
- *
- * @ingroup dbtng_example
- */
 function resume_install() {
   // Insert some example data into our schema.
   $entries = [
@@ -149,15 +135,6 @@ function resume_install() {
   }
 }
 
-/**
- * Implements hook_schema().
- *
- * Defines the database tables used by this module.
- *
- * @see hook_schema()
- *
- * @ingroup dbtng_example
- */
 function resume_schema() {
   $schema['resume'] = [
     'description' => 'Stores example person entries for demonstration purposes.',
