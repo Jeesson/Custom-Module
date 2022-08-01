@@ -3,8 +3,8 @@ namespace Drupal\resume\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Database\Connection;
-use Drupal\resume\InfoService;
-use Drupal\resume\TotallyNews;
+use Drupal\resume_core\InfoService;
+use Drupal\resume_decorator\InfoServiceDecorator;
 use Laminas\Diactoros\Response\JsonResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
@@ -15,19 +15,19 @@ class ResumeFormController extends ControllerBase {
 
   protected Connection $connection;
   protected InfoService $infoService;
-  protected TotallyNews $totallyNews;
+  protected InfoServiceDecorator $infoDecorator;
   /**
    *
    * @param Connection $connection
    * The database connection.
    * @param InfoService $infoService
-   * @param TotallyNews $totallyNews
+   * @param InfoServiceDecorator $infoDecorator
    *
    */
-  public function __construct(Connection $connection, InfoService $infoService, TotallyNews $totallyNews) {
+  public function __construct(Connection $connection, InfoService $infoService, InfoServiceDecorator $infoDecorator) {
     $this->connection = $connection;
     $this->infoService = $infoService;
-    $this->totallyNews = $totallyNews;
+    $this->infoDecorator = $infoDecorator;
   }
 
   /**
@@ -37,7 +37,7 @@ class ResumeFormController extends ControllerBase {
     return new static(
       $container->get('database'),
       $container->get('resume.info'),
-      $container->get('resume.news'),
+      $container->get('resume.decorator'),
     );
   }
 
@@ -61,9 +61,8 @@ class ResumeFormController extends ControllerBase {
 
 
 //    echo ('<p>'.$this->infoService->getRandInfo().'</p>');
-    echo ('<p>'.$this->totallyNews->getRandInfo().'</p>');
-    echo ('<p>'.$this->totallyNews->getAllInfo().'</p>');
-    echo ('<p>'.$this->totallyNews->getSomeInfo(1).'</p>');
+    echo ('<p>'.$this->infoService->getRandInfo().'</p>');
+    echo ('<p>'.$this->infoDecorator->getRandInfo().'</p>');
 
 
     foreach ($orders as $row) {

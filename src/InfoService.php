@@ -1,18 +1,11 @@
 <?php
-namespace Drupal\resume;
-
-/**
- * Info interface
- */
-interface Info {
-  public function getRandInfo();
-}
-
+namespace Drupal\resume_core;
+use Drupal\resume_interface\InfoInterface;
 /**
  * Simple service that return some info ha-ha...
  * @returns string
  */
-class InfoService implements Info {
+class InfoService implements InfoInterface {
   private array $random_info = [
     "<span>InfoService: That's just a Drupal services</span>",
     "<span>InfoService: Hi, the dev's name is Pavel</span>",
@@ -21,45 +14,15 @@ class InfoService implements Info {
     "<span>InfoService: Simple service</span>",
   ];
 
+  public function __construct()
+  {
+    return 'Сервис: InfoService подключен!';
+  }
+
   /**
    * @inerhitDoc
    */
   public function getRandInfo(): string {
     return $this->random_info[array_rand($this->random_info)];
-  }
-
-}
-
-abstract class InfoDecorator implements Info {
-  protected InfoService $info;
-
-  // public function __construct(InfoService $info) {
-  //   $this->$info = $info;
-  // }
-
-  abstract public function getAllInfo();
-  abstract public function getSomeInfo(int $num);
-}
-
-class TotallyNews extends InfoDecorator {
-  protected string $classname = '<p>Totally News:</p>';
-  private array $random_infos = [
-    "<span>That's just a Drupal services</span>",
-    "<span>Hi, the dev's name is Pavel</span>",
-    "<span>Lorem ipsum ha-ha-ha</span>",
-    "<span>Too hard for me</span>",
-    "<span>Simple service</span>",
-  ];
-
-  public function getRandInfo(): string {
-    return $this->classname . $this->random_infos[array_rand($this->random_infos)];
-  }
-
-  public function getAllInfo(): string {
-    return $this->classname . join('<span style="color:white !important;">, </span>', $this->random_infos);
-  }
-
-  public function getSomeInfo(int $num): string {
-    return $this->classname . $this->random_infos[$num] . ' <span style="color:white !important;">['.$num.']</span>';
   }
 }

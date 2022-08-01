@@ -1,5 +1,8 @@
 services:
   resume.info:
-    class: Drupal\resume\InfoService
-  resume.news:
-    class: Drupal\resume\TotallyNews
+    class: Drupal\resume_core\InfoService
+  resume.decorator:
+    class: Drupal\resume_decorator\InfoServiceDecorator
+    public: false
+    decorates: resume.info
+    decoration_priority: 5
