@@ -6,3 +6,8 @@ services:
     public: true
     decorates: resume.info
     decoration_priority: 5
+  resume.decorator_2:
+    class: Drupal\resume\InfoServiceDecorator2
+    public: true
+    decorates: resume.info
+    decoration_priority: 4
