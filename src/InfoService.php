@@ -1,6 +1,5 @@
 <?php
-namespace Drupal\resume_core;
-use Drupal\resume_interface\InfoInterface;
+namespace Drupal\resume;
 /**
  * Simple service that return some info ha-ha...
  * @returns string
@@ -14,9 +13,8 @@ class InfoService implements InfoInterface {
     "<span>InfoService: Simple service</span>",
   ];
 
-  public function __construct()
-  {
-    return 'Сервис: InfoService подключен!';
+  public function __construct() {
+    echo '<p>Сервис: InfoService подключен!</p>';
   }
 
   /**

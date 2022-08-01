@@ -1,8 +1,8 @@
 services:
   resume.info:
-    class: Drupal\resume_core\InfoService
+    class: Drupal\resume\InfoService
   resume.decorator:
-    class: Drupal\resume_decorator\InfoServiceDecorator
-    public: false
+    class: Drupal\resume\InfoServiceDecorator
+    public: true
     decorates: resume.info
     decoration_priority: 5

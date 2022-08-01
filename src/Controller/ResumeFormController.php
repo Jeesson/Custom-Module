@@ -3,8 +3,8 @@ namespace Drupal\resume\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Database\Connection;
-use Drupal\resume_core\InfoService;
-use Drupal\resume_decorator\InfoServiceDecorator;
+use Drupal\resume\InfoService;
+use Drupal\resume\InfoServiceDecorator;
 use Laminas\Diactoros\Response\JsonResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 /**

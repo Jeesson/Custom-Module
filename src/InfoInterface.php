@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\resume_interface;
+namespace Drupal\resume;
 
 /**
  * Info interface
