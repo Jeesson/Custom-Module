@@ -1,10 +1,21 @@
-.result_message {
-  color: green;
-  background-color: rgba(0,0,0,0);
+table {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  background-color: white;
 }
 
-.my_message {
-  margin: 10px 0;
-  padding: 10px 20px;
-  font-size: 2em;
+.data, .header {
+  text-align: center; !important;
+  padding: 8px; !important;
+}
+
+table thead th {
+  color: #ffffff;
+  background: #324960;
 }

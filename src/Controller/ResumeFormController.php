@@ -3,24 +3,31 @@ namespace Drupal\resume\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Database\Connection;
+use Drupal\resume\InfoService;
+use Drupal\resume\InfoServiceDecorator;
+use Laminas\Diactoros\Response\JsonResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
  * Class ResumeFormController
  * @package Drupal\resume\Controller
  */
 class ResumeFormController extends ControllerBase {
 
-  protected $connection;
-
+  protected Connection $connection;
+  protected InfoService $infoService;
+  protected InfoServiceDecorator $infoDecorator;
   /**
-   * Constructs a new DblogClearLogConfirmForm.
    *
-   * @param \Drupal\Core\Database\Connection $connection
-   *   The database connection.
+   * @param Connection $connection
+   * The database connection.
+   * @param InfoService $infoService
+   * @param InfoServiceDecorator $infoDecorator
+   *
    */
-  public function __construct(Connection $connection) {
+  public function __construct(Connection $connection, InfoService $infoService, InfoServiceDecorator $infoDecorator) {
     $this->connection = $connection;
+    $this->infoService = $infoService;
+    $this->infoDecorator = $infoDecorator;
   }
 
   /**
@@ -28,7 +35,9 @@ class ResumeFormController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('database')
+      $container->get('database'),
+      $container->get('resume.info'),
+      $container->get('resume.decorator'),
     );
   }
 
@@ -37,32 +46,84 @@ class ResumeFormController extends ControllerBase {
    */
   public function index() {
 
-    $field_arr = ['uid', 'first_name', 'last_name', 'email', 'description', 'gender', 'dob'];
+    $field_arr = ['pid', 'first_name', 'last_name', 'email', 'description', 'gender', 'dob'];
+//    $field_arr = ['pid', 'first_name', 'last_name'];
     $database = $this->connection;
-    $query = $database->select('resume', 'r')
-      ->fields('r', $field_arr)
-      ->execute()->fetchAll();
+    $query = $database->select('resume', 'r');
+    $query->addJoin('INNER','resume_orders', 'c', 'r.pid=c.personid');
+    $query->fields('r', $field_arr);
+    $query->fields('c', ['orderid', 'order_date', 'role']);
+    $query->orderBy('order_date');
+    $orders = $query->execute()->fetchAll();
 
-    foreach ($query as $row) {
+//    Database data
+    echo ('<p>'.json_encode($orders).'</p><br>');
+
+
+//    echo ('<p>'.$this->infoService->getRandInfo().'</p>');
+    echo ('<p>'.$this->infoService->getRandInfo().'</p>');
+    echo ('<p>'.$this->infoDecorator->getRandInfo().'</p>');
+
+
+    foreach ($orders as $row) {
       $data[] = [
-        'uid' => $row->uid,
+        'pid' => [
+          'data' => $row->pid,
+          'class' => 'data',
+        ],
         'first_name' => $row->first_name,
         'last_name' => $row->last_name,
         'email' => $row->email,
         'description' => $row->description,
         'gender' => $row->gender,
         'dob' => $row->dob,
+        'person_id' => $row->pid,
+        'order_date' => $row->order_date,
+        'customer_role' => $row->role,
       ];
     }
 
     $header = [
-      'col0' => t('Uid'),
-      'col1' => t('Name'),
-      'col2' => t('Surname'),
-      'col3' => t('Email'),
-      'col4' => t('Description'),
-      'col5' => t('Gender'),
-      'col6' => t('DOB'),
+      'col0' => [
+        'data' => $this->t('PID'),
+        'class' => 'header',
+      ],
+      'col1' => [
+        'data' => $this->t('Name'),
+        'class' => 'header',
+      ],
+      'col2' => [
+        'data' => $this->t('Surname'),
+        'class' => 'header',
+      ],
+      'col3' => [
+        'data' => $this->t('Email'),
+        'class' => 'header',
+      ],
+      'col4' => [
+        'data' => $this->t('Description'),
+        'class' => 'header',
+      ],
+      'col5' => [
+        'data' => $this->t('Gender'),
+        'class' => 'header',
+      ],
+      'col6' => [
+        'data' => $this->t('DOB'),
+        'class' => 'header',
+      ],
+      'col7' => [
+        'data' => $this->t('Person ID'),
+        'class' => 'header',
+      ],
+      'col8' => [
+        'data' => $this->t('Order date'),
+        'class' => 'header',
+      ],
+      'col9' => [
+        'data' => $this->t('Customer role'),
+        'class' => 'header',
+      ],
     ];
 
     return [

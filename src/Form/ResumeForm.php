@@ -15,10 +15,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ResumeForm extends FormBase {
 
-  protected $connection;
+  protected Connection $connection;
 
   /**
-   * @param \Drupal\Core\Database\Connection $connection
+   * @param Connection $connection
    *   The database connection.
    */
   public function __construct(Connection $connection) {
@@ -130,12 +130,11 @@ class ResumeForm extends FormBase {
       $form_state->setErrorByName('first_name', $this->t('First name only contain the "a to z" and "A to Z" char.'));
     }
     if (preg_match("/^[a-zA-Z]+$/", $form_state->getValue('last_name') ) == 0) {
+      // string only contain the a to z , A to Z
       $form_state->setErrorByName('last_name', $this->t('Last name only contain the "a to z" and "A to Z" char.'));
     }
 
     if (preg_match($email_regex, $form_state->getValue('email')) == 0) {
-//      $this->messenger()->addMessage(filter_var($form_state->getValue('email'), FILTER_VALIDATE_EMAIL));
-//      $this->messenger()->addMessage(preg_match($email_regex, $form_state->getValue('email')));
       $form_state->setErrorByName('email', $this->t('Email error'));
     }
 
@@ -171,7 +170,7 @@ class ResumeForm extends FormBase {
       $query->insert('resume')
         ->fields($field_arr)
         ->execute();
-      $messenger->addMessage($this->t("Данные успешно сохранены да 🖤"));
+      $messenger->addMessage($this->t("Данные успешно сохранены 🖤"));
 //    } else $messenger->addError('Неавторизованным челиксам доступ закрыт, ты как сюда попал? 🤬');
 
   }

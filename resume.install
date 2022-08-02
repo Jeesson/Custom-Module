@@ -1,19 +1,5 @@
 <?php
 
-/**
- * @file
- * Install, update and uninstall functions for the dbtng_example module.
- */
-
-/**
- * Implements hook_install().
- *
- * Creates some default entries on this module custom table.
- *
- * @see hook_install()
- *
- * @ingroup dbtng_example
- */
 function resume_install() {
   // Insert some example data into our schema.
   $entries = [
@@ -34,23 +20,121 @@ function resume_install() {
       'dob' => '1999-05-24',
       'description' => 'Test user',
     ],
+    [
+      'uid' => 2,
+      'first_name' => 'Donald',
+      'last_name' => 'Gillespie',
+      'email' => 'marietta_kel@yahoo.com',
+      'gender' => 'Male',
+      'dob' => '1970-10-14',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 3,
+      'first_name' => 'Charlotte',
+      'last_name' => 'Johnson',
+      'email' => 'seth.rau1981@gmail.com',
+      'gender' => 'Female',
+      'dob' => '1970-10-18',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 4,
+      'first_name' => 'Wendy',
+      'last_name' => 'Williams',
+      'email' => 'nina1992@hotmail.com',
+      'gender' => 'Female',
+      'dob' => '1982-7-9',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 5,
+      'first_name' => 'George',
+      'last_name' => 'Benitez',
+      'email' => 'alfredo2008@hotmail.com',
+      'gender' => 'Male',
+      'dob' => '1979-9-30',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 6,
+      'first_name' => 'Charles',
+      'last_name' => 'Ramirez',
+      'email' => 'anibal1989@gmail.com',
+      'gender' => 'Male',
+      'dob' => '1989-12-18',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 7,
+      'first_name' => 'Jessica',
+      'last_name' => 'Reyes',
+      'email' => 'gunner_welc4@gmail.com',
+      'gender' => 'Female',
+      'dob' => '1991-8-27',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 8,
+      'first_name' => 'Elizabeth',
+      'last_name' => 'Hurst',
+      'email' => 'johnathan_schroed@hotmail.com',
+      'gender' => 'Female',
+      'dob' => '1971-10-7',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 9,
+      'first_name' => 'William',
+      'last_name' => 'Agostini',
+      'email' => 'anita2007@hotmail.com',
+      'gender' => 'Male',
+      'dob' => '1987-9-26',
+      'description' => 'Test user',
+    ],
+    [
+      'uid' => 10,
+      'first_name' => 'John',
+      'last_name' => 'Orcutt',
+      'email' => 'jacky1973@yahoo.com',
+      'gender' => 'Male',
+      'dob' => '1950-8-18',
+      'description' => 'Test user',
+    ],
+  ];
+
+  $entries_two = [
+    [
+      'role' => 'Customer',
+      'order_date' => '2022-7-22 13:30:00',
+    ],
+    [
+      'pid' => 2,
+      'role' => 'VIP',
+      'order_date' => '2022-7-22 13:35:00'
+    ],
+    [
+      'pid' => 3,
+      'role' => 'Manager',
+      'order_date' => '2022-7-22 13:38:00'
+    ],
+    [
+      'pid' => 4,
+      'role' => 'Customer',
+      'order_date' => '2022-7-22 13:40:00'
+    ],
   ];
 
   $connection = \Drupal::database();
   foreach ($entries as $entry) {
     $connection->insert('resume')->fields($entry)->execute();
+  };
+  unset($entry);
+  foreach ($entries_two as $entry) {
+    $connection->insert('resume_orders')->fields($entry)->execute();
   }
 }
 
-/**
- * Implements hook_schema().
- *
- * Defines the database tables used by this module.
- *
- * @see hook_schema()
- *
- * @ingroup dbtng_example
- */
 function resume_schema() {
   $schema['resume'] = [
     'description' => 'Stores example person entries for demonstration purposes.',
@@ -113,6 +197,35 @@ function resume_schema() {
       'name' => ['first_name'],
       'surname' => ['last_name'],
       'age' => ['dob'],
+    ],
+  ];
+
+  $schema['resume_orders'] = [
+    'description' => 'Stores example orders entries for demonstration purposes.',
+    'fields' => [
+      'pid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique order ID.',
+      ],
+      'role' => [
+        'type' => 'varchar',
+        'not null' => FALSE,
+        'default' => 'Customer',
+        'length' => 255,
+        'description' => 'The role of the person.',
+      ],
+      'order_date' => [
+        'type' => 'varchar',
+        'not null' => FALSE,
+        'default' => '2022-01-01',
+        'length' => 255,
+        'description' => 'The order of the person.',
+      ],
+    ],
+    'primary key' => ['pid'],
+    'indexes' => [
+      'date' => ['order_date'],
     ],
   ];
 
