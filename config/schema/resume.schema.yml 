@@ -1,0 +1,8 @@
+field.field_settings.[FIELD ID]:
+  type: mapping
+  label: 'FIELDNAME settings'
+  mapping:
+    size:
+      type: string
+      label: 'Size'
+
