@@ -1,6 +1,6 @@
-field.field_settings.[FIELD ID]:
+field.field_settings.resume_type:
   type: mapping
-  label: 'FIELDNAME settings'
+  label: 'Resume settings'
   mapping:
     size:
       type: string

@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * @FieldWidget(
- *   id = "Resume_default",
+ *   id = "resume_default",
  *   label = @Translation("Resume default"),
  *   field_types = {
  *      "resume_type"
  *   }
- *)
+ *  )
  */
 
 class ResumeDefaultWidget extends WidgetBase {

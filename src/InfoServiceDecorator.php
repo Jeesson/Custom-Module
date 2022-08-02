@@ -4,12 +4,12 @@ namespace Drupal\resume;
 class InfoServiceDecorator extends InfoService {
 
   public function __construct() {
+    echo '<p>Сервис декоратор 1: InfoServiceDecorator подключен!</p>';
     parent::__construct();
-    echo '<p>Сервис декоратор: InfoServiceDecorator подключен!</p>';
   }
 
   public function getRandInfo(): string {
-    return parent::getRandInfo() . '<br><p>Сервис декоратор: InfoServiceDecorator подключен! (функция)</p>';
+    echo ('<br><p>Сервис декоратор 1: InfoServiceDecorator подключен! (функция)</p>');
+    return parent::getRandInfo();
   }
-
 }

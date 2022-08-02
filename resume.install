@@ -105,21 +105,25 @@ function resume_install() {
 
   $entries_two = [
     [
-      'role' => 'Customer',
+      'personid' => random_int(0,11),
+      'role' => 'VIP',
       'order_date' => '2022-7-22 13:30:00',
     ],
     [
-      'pid' => 2,
+      'orderid' => 2,
+      'personid' => random_int(0,11),
       'role' => 'VIP',
       'order_date' => '2022-7-22 13:35:00'
     ],
     [
-      'pid' => 3,
+      'orderid' => 3,
+      'personid' => random_int(0,11),
       'role' => 'Manager',
       'order_date' => '2022-7-22 13:38:00'
     ],
     [
-      'pid' => 4,
+      'orderid' => 4,
+      'personid' => random_int(0,11),
       'role' => 'Customer',
       'order_date' => '2022-7-22 13:40:00'
     ],
@@ -203,10 +207,16 @@ function resume_schema() {
   $schema['resume_orders'] = [
     'description' => 'Stores example orders entries for demonstration purposes.',
     'fields' => [
-      'pid' => [
+      'orderid' => [
         'type' => 'serial',
         'not null' => TRUE,
         'description' => 'Primary Key: Unique order ID.',
+      ],
+      'personid' => [
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+        'description' => 'Secondary Key: Not unique person ID.',
       ],
       'role' => [
         'type' => 'varchar',
@@ -223,7 +233,7 @@ function resume_schema() {
         'description' => 'The order of the person.',
       ],
     ],
-    'primary key' => ['pid'],
+    'primary key' => ['orderid'],
     'indexes' => [
       'date' => ['order_date'],
     ],

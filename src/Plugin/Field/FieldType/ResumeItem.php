@@ -11,9 +11,9 @@ use Drupal\Core\TypedData\DataDefinition;
  *
  * @FieldType(
  *   id = "resume_type",
- *   label = @Translation("Resume field"),
- *   default_formatter = "Resume_default",
- *   default_widget = "Resume_default",
+ *   label = @Translation("resume field"),
+ *   default_formatter = "resume_default",
+ *   default_widget = "resume_default",
  * )
  */
 class ResumeItem extends FieldItemBase {
