@@ -8,11 +8,11 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * @FieldWidget(
  *   id = "resume_default",
- *   label = @Translation("Resume default"),
+ *   label = @Translation("Resume default widget"),
  *   field_types = {
- *      "resume_type"
+ *     "resume_type"
  *   }
- *  )
+ * )
  */
 
 class ResumeDefaultWidget extends WidgetBase {
@@ -21,15 +21,14 @@ class ResumeDefaultWidget extends WidgetBase {
    * @inheritDoc
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-//    $widget = parent::formElement($items, $delta, $element, $form, $form_state);
-    $widget['quantity'] = array(
-      '#title' => $this->t('Quantity'),
+    $value = isset($items[$delta]->quantity) ? $items[$delta]->quantity : '';
+    $element += [
       '#type' => 'number',
-      '#default_value' => isset($items[$delta]) ? $items[$delta]->quantity : 1,
+      '#default_value' => $value,
       '#min' => 1,
       '#weight' => 10,
-    );
+    ];
 
-    return $widget;
+    return ['quantity' => $element];
   }
 }

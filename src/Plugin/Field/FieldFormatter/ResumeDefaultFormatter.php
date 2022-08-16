@@ -9,9 +9,9 @@ use Drupal\Core\Field\FormatterBase;
  *   id = "resume_default",
  *   label = @Translation("Resume default"),
  *   field_types = {
- *      "resume_type"
+ *     "resume_type"
  *   }
- *  )
+ * )
  */
 
 class ResumeDefaultFormatter extends FormatterBase {
@@ -20,7 +20,6 @@ class ResumeDefaultFormatter extends FormatterBase {
    * @inheritDoc
    */
   public function viewElements(FieldItemListInterface $items, $langcode): array {
-//    $elements = parent::viewElements($items, $langcode);
     $elements = [];
     $values = $items->getValue();
 

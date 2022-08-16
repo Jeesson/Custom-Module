@@ -15,7 +15,6 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("Resume Field"),
  *   default_formatter = "resume_default",
  *   default_widget = "resume_default",
- *   list_class = "\Drupal\Core\Field\EntityReferenceFieldItemList",
  * )
  */
 class ResumeItem extends FieldItemBase {
@@ -23,12 +22,18 @@ class ResumeItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
+  public static function mainPropertyName() {
+    return 'quantity';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
-//    $properties = parent::propertyDefinitions($field_definition);
-    $quantity_definition = DataDefinition::create('integer')
-      ->setLabel(new TranslatableMarkup('Quantity'))
-      ->setRequired(TRUE);
-    $properties['quantity'] = $quantity_definition;
+    $properties = [];
+    $properties['quantity'] = DataDefinition::create('integer')
+      ->setLabel(new TranslatableMarkup('Quantity'));
+
     return $properties;
   }
 
@@ -36,24 +41,29 @@ class ResumeItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
-//    $schema = parent::schema($field_definition);
-    $schema['columns']['quantity'] = array(
-      'type' => 'int',
-      'size' => 'tiny',
-      'unsigned' => TRUE,
-    );
+    return [
+      'columns' => [
+        'quantity' => [
+          'type' => 'int',
+          'size' => 'tiny',
+          'unsigned' => TRUE,
+        ],
+      ],
+    ];
+  }
 
-    return $schema;
+  /**
+   * {@inheritdoc}
+   */
+  public static function defaultFieldSettings(): array {
+    return ['size' => 'medium'] + parent::defaultFieldSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public function fieldSettingsForm(array $form, FormStateInterface $form_state): array {
-
     $element = [];
-
-    // The key of the element should be the setting name
     $element['size'] = [
       '#type' => 'select',
       '#title' => $this->t('Choose your size'),
@@ -67,6 +77,14 @@ class ResumeItem extends FieldItemBase {
     ];
 
     return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isEmpty() {
+    $value = $this->get('quantity')->getValue();
+    return $value === NULL || $value === '';
   }
 
 }
