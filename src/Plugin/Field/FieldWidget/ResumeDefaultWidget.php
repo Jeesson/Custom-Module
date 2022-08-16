@@ -21,18 +21,15 @@ class ResumeDefaultWidget extends WidgetBase {
    * @inheritDoc
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element = [];
+//    $widget = parent::formElement($items, $delta, $element, $form, $form_state);
+    $widget['quantity'] = array(
+      '#title' => $this->t('Quantity'),
+      '#type' => 'number',
+      '#default_value' => isset($items[$delta]) ? $items[$delta]->quantity : 1,
+      '#min' => 1,
+      '#weight' => 10,
+    );
 
-    $element['value'] = [
-      '#type' => 'select',
-      '#options' => [
-        'Debug' => 'Debug',
-        'CST' => 'Customer',
-        'MNG' => 'Manager',
-        'VIP' => 'Very Important Person',
-      ],
-      '#title' => t('Who was it is?'),
-    ];
-    return $element;
+    return $widget;
   }
 }

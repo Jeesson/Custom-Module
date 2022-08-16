@@ -5,4 +5,3 @@ field.field_settings.resume_type:
     size:
       type: string
       label: 'Size'
-
