@@ -23,27 +23,51 @@ class ResumeItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
-//    $properties = parent::propertyDefinitions($field_definition);
-    $quantity_definition = DataDefinition::create('integer')
-      ->setLabel(new TranslatableMarkup('Quantity'))
-      ->setRequired(TRUE);
-    $properties['quantity'] = $quantity_definition;
-    return $properties;
+  public static function schema(FieldStorageDefinitionInterface $field_definition) {
+    return [
+      // columns contains the values that the field will store
+      'columns' => [
+        // List the values that the field will save.
+        'value' => [
+          'type' => 'text',
+          'size' => 'small',
+          'not null' => FALSE,
+        ],
+        'long' => [
+          'type' => 'int',
+          'size' => 'small',
+          'not null' => FALSE,
+        ],
+      ],
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function schema(FieldStorageDefinitionInterface $field_definition) {
-//    $schema = parent::schema($field_definition);
-    $schema['columns']['quantity'] = array(
-      'type' => 'int',
-      'size' => 'tiny',
-      'unsigned' => TRUE,
-    );
+  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
+    $properties = [];
+    $properties['value'] = DataDefinition::create('string')->setLabel(t('Value'));
+    $properties['long'] = DataDefinition::create('integer')->setLabel(t('Long'));
 
-    return $schema;
+    return $properties;
+  }
+
+
+  public function isEmpty() {
+    $value = $this->get('value')->getValue();
+    $long = $this->get('long')->getValue();
+
+    return
+      ($value === NULL || $value === '' || $value === 0) &&
+      ($long === NULL || $long === '' || $long === 0);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function defaultFieldSettings(): array {
+    return ['size' => 'large'] + parent::defaultFieldSettings();
   }
 
   /**
@@ -68,5 +92,4 @@ class ResumeItem extends FieldItemBase {
 
     return $element;
   }
-
 }

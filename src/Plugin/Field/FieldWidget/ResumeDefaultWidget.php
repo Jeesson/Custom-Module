@@ -20,16 +20,36 @@ class ResumeDefaultWidget extends WidgetBase {
   /**
    * @inheritDoc
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-//    $widget = parent::formElement($items, $delta, $element, $form, $form_state);
-    $widget['quantity'] = array(
-      '#title' => $this->t('Quantity'),
-      '#type' => 'number',
-      '#default_value' => isset($items[$delta]) ? $items[$delta]->quantity : 1,
-      '#min' => 1,
-      '#weight' => 10,
-    );
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state)
+  {
+    $value = isset($items->value) ? $items[$delta]->value : NULL;
+    $long = isset($items->long) ? $items[$delta]->long : 150;
 
-    return $widget;
+    $element['value'] = [
+      '#type' => 'select',
+      '#empty_value' => 'None',
+      '#options' => [
+        'DBG' => 'Debug',
+        'CST' => 'Customer',
+        'MNG' => 'Manager',
+        'VIP' => 'Very Important Person',
+      ],
+      '#title' => $this->t('Who was that?'),
+      '#default_value' => $value,
+    ];
+    $element['long'] = [
+      '#type' => 'number',
+      '#size' => 4,
+      '#min' => 120,
+      '#max' => 220,
+      '#step' => 5,
+      '#title' => $this->t('How long are you been here?'),
+      '#default_value' => $long,
+    ];
+//    This value should be of the correct primitive type.
+    return [
+      'value' => $element['value'],
+      'long' => $element['long'],
+    ];
   }
 }

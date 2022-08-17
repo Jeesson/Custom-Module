@@ -20,14 +20,11 @@ class ResumeDefaultFormatter extends FormatterBase {
    * @inheritDoc
    */
   public function viewElements(FieldItemListInterface $items, $langcode): array {
-//    $elements = parent::viewElements($items, $langcode);
-    $elements = [];
-    $values = $items->getValue();
 
-    foreach ($values as $delta => $entity) {
-      $elements[$delta] = [
-        "#type" => 'markup',
-        "#markup" => $entity['quantity']
+    foreach ($items as $key => $element) {
+      $elements[$key] = [
+        '#type' => 'markup',
+        '#markup' => '<code>' . $element->value .', '. $element->long . '</code>',
       ];
     }
 
