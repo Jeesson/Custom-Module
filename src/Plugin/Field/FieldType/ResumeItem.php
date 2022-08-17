@@ -15,7 +15,6 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("Resume Field"),
  *   default_formatter = "resume_default",
  *   default_widget = "resume_default",
- *   list_class = "\Drupal\Core\Field\EntityReferenceFieldItemList",
  * )
  */
 class ResumeItem extends FieldItemBase {
@@ -74,10 +73,7 @@ class ResumeItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public function fieldSettingsForm(array $form, FormStateInterface $form_state): array {
-
     $element = [];
-
-    // The key of the element should be the setting name
     $element['size'] = [
       '#type' => 'select',
       '#title' => $this->t('Choose your size'),

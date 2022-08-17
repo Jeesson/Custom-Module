@@ -9,9 +9,9 @@ use Drupal\Core\Field\FormatterBase;
  *   id = "resume_default",
  *   label = @Translation("Resume default"),
  *   field_types = {
- *      "resume_type"
+ *     "resume_type"
  *   }
- *  )
+ * )
  */
 
 class ResumeDefaultFormatter extends FormatterBase {
