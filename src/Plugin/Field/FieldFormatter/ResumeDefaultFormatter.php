@@ -7,11 +7,11 @@ use Drupal\Core\Field\FormatterBase;
 /**
  * @FieldFormatter(
  *   id = "resume_default",
- *   label = @Translation("Resume"),
+ *   label = @Translation("Resume default"),
  *   field_types = {
- *      "resume_type"
+ *     "resume_type"
  *   }
- *  )
+ * )
  */
 
 class ResumeDefaultFormatter extends FormatterBase {
@@ -20,17 +20,13 @@ class ResumeDefaultFormatter extends FormatterBase {
    * @inheritDoc
    */
   public function viewElements(FieldItemListInterface $items, $langcode): array {
-//    Допустим такой массив
-    $elements = ['ID', 'NAME', 'ROLE'];
-    $i = 0;
-    foreach ($elements as $element) {
-      $elements[$i] = [
-        '#type' => 'markup',
-        '#markup' => '<code>' . $element . '</code>',
-      ];
-      $i += 1;
-    }
 
+    foreach ($items as $key => $element) {
+      $elements[$key] = [
+        '#type' => 'markup',
+        '#markup' => '<code>' . $element->value .', '. $element->long . '</code>',
+      ];
+    }
 
     return $elements;
   }

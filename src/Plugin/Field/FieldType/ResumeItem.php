@@ -4,6 +4,7 @@ namespace Drupal\resume\Plugin\Field\FieldType;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
@@ -11,7 +12,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *
  * @FieldType(
  *   id = "resume_type",
- *   label = @Translation("resume field"),
+ *   label = @Translation("Resume Field"),
  *   default_formatter = "resume_default",
  *   default_widget = "resume_default",
  * )
@@ -25,11 +26,15 @@ class ResumeItem extends FieldItemBase {
     return [
       // columns contains the values that the field will store
       'columns' => [
-        // List the values that the field will save. This
-        // field will only save a single value, 'value'
+        // List the values that the field will save.
         'value' => [
           'type' => 'text',
-          'size' => 'tiny',
+          'size' => 'small',
+          'not null' => FALSE,
+        ],
+        'long' => [
+          'type' => 'int',
+          'size' => 'small',
           'not null' => FALSE,
         ],
       ],
@@ -42,46 +47,45 @@ class ResumeItem extends FieldItemBase {
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
     $properties = [];
     $properties['value'] = DataDefinition::create('string')->setLabel(t('Value'));
+    $properties['long'] = DataDefinition::create('integer')->setLabel(t('Long'));
 
     return $properties;
   }
 
 
-  public function isEmpty(): bool {
+  public function isEmpty() {
     $value = $this->get('value')->getValue();
-    return $value === NULL || $value === '';
+    $long = $this->get('long')->getValue();
+
+    return
+      ($value === NULL || $value === '' || $value === 0) &&
+      ($long === NULL || $long === '' || $long === 0);
   }
 
   /**
    * {@inheritdoc}
    */
   public static function defaultFieldSettings(): array {
-    return [
-        // Declare a single setting, 'size', with a default
-        // value of 'large'
-        'size' => 'large',
-      ] + parent::defaultFieldSettings();
+    return ['size' => 'large'] + parent::defaultFieldSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public function fieldSettingsForm(array $form, FormStateInterface $form_state): array {
-
     $element = [];
-    // The key of the element should be the setting name
     $element['size'] = [
-      '#title' => $this->t('Size'),
       '#type' => 'select',
+      '#title' => $this->t('Choose your size'),
       '#options' => [
         'small' => $this->t('Small'),
         'medium' => $this->t('Medium'),
         'large' => $this->t('Large'),
       ],
+      '#description' => $this->t('Try to choose your real P size :D'),
       '#default_value' => $this->getSetting('size'),
     ];
 
     return $element;
   }
-
 }
