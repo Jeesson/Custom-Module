@@ -27,7 +27,8 @@ class ResumeDefaultWidget extends WidgetBase {
 
     $element['value'] = [
       '#type' => 'select',
-      '#empty_value' => 'None',
+      '#empty_option' => 'кто??',
+      '#empty_value' => '',
       '#options' => [
         'DBG' => 'Debug',
         'CST' => 'Customer',
