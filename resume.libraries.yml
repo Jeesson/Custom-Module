@@ -1,10 +1,8 @@
 resume-asset: # Create library asset name
   version: 1.x
   css:
-    component:
+    theme:
       css/resume-theme.css: {}
-    layout:
-      css/resume-layout.css: {}
   js:
     js/resume.js: {}
 
