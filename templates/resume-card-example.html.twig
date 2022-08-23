@@ -1,0 +1,24 @@
+{{ attach_library('resume/resume-asset') }}
+<div class="container g-0">
+  <div class="row row-cols-2 g-2">
+
+    {% for item in items %}
+      <div class="col">
+        <div class="card">
+          <img class="card-img-top" src="{{ item.img }}" alt="IMG">
+          <div class="card-body">
+            <h1 class="card-title mt-0">{{ item.title }}</h1>
+            <p class="card-text">{{ item.desc }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <span class="m-0">Сейчас {{ date }}</span>
+            {% if item.id %}
+              <span class="m-0">{{ item.id }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>

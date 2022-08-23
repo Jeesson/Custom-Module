@@ -66,15 +66,11 @@ class ResumeFormController extends ControllerBase
     $query->orderBy('order_date');
     $orders = $query->execute()->fetchAll();
 
-//    echo ('<p>'.$this->infoService->getRandInfo().'</p>');
-    echo('<p>' . $this->infoDecorator2->getRandInfo() . '</p>');
-    echo('<p>' . $this->infoDecorator->getRandInfo() . '</p>');
-
 //    Database data
     $dbData['row'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['container', 'row', 'g-0', 'gap-2'],
+        'class' => ['container', 'row', 'g-2', 'mb-2'],
       ],
     ];
 
@@ -82,12 +78,10 @@ class ResumeFormController extends ControllerBase
       '#type' => 'html_tag',
       '#tag' => 'code',
       '#attributes' => [
-        'class' => ['card', 'card-body', 'mb-2']
+        'class' => ['card', 'card-body']
       ],
       '#value' => json_encode($orders)
     ];
-
-    $dbData['#attached']['library'][] = 'resume/resume-asset';
 
     foreach ($orders as $row) {
       $data[] = [
@@ -152,97 +146,66 @@ class ResumeFormController extends ControllerBase
 
     return [
       [
+        '#type' => 'html_tag',
+        '#tag' => 'code',
+        '#attributes' => [
+          'class' => ['card', 'card-body mb-2']
+        ],
+        '#value' => $this->infoDecorator2->getRandInfo(),
+      ],
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'code',
+        '#attributes' => [
+          'class' => ['card', 'card-body mb-2']
+        ],
+        '#value' => $this->infoDecorator->getRandInfo(),
+      ],
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'code',
+        '#attributes' => [
+          'class' => ['card', 'card-body mb-2']
+        ],
+        '#value' => $this->infoService->getRandInfo(),
+      ],
+      [
+        '#theme' => 'resume_card_example',
+        '#items' => [
+          [
+            'title' => 'Во втором сезоне Star Wars: Visions будут эпизоды от студий из разных стран мира',
+            'desc' => 'Первый сезон Star Wars: Visions был антологией короткометражек от именитых мультипликационных студий Японии. Во втором сезоне размах будет глобальным — работы будут представлены от команд из разных концов мира.',
+            'img' => 'https://cdn.shazoo.ru/c1400x625/636930_hNhMEiD_ronin-in-star-wars-visions-2021.jpg',
+            'id' => 4,
+          ],
+          [
+            'title' => 'Подробности следующего сезона и новый оперативник в презентации Rainbow Six Siege',
+            'desc' => 'Ubisoft провела презентацию следующего сезона Rainbow Six Siege, который получил подзаголовок Brutal Swarm. Название отсылает к новому оперативнику игры — Гриму, который может управлять роем дронов-насекомых, напоминающих пчел.',
+            'img' => 'https://cdn.shazoo.ru/c1400x625/636962_CRU8B25_siege.jpg',
+            'id' => 3,
+          ],
+          [
+            'title' => 'Подробности следующего сезона и новый оперативник в презентации Rainbow Six Siege',
+            'desc' => 'Ubisoft провела презентацию следующего сезона Rainbow Six Siege, который получил подзаголовок Brutal Swarm. Название отсылает к новому оперативнику игры — Гриму, который может управлять роем дронов-насекомых, напоминающих пчел.',
+            'img' => 'https://cdn.shazoo.ru/c1400x625/636962_CRU8B25_siege.jpg',
+            'id' => 2,
+          ],
+          [
+            'title' => 'Во втором сезоне Star Wars: Visions будут эпизоды от студий из разных стран мира',
+            'desc' => 'Первый сезон Star Wars: Visions был антологией короткометражек от именитых мультипликационных студий Японии. Во втором сезоне размах будет глобальным — работы будут представлены от команд из разных концов мира.',
+            'img' => 'https://cdn.shazoo.ru/c1400x625/636930_hNhMEiD_ronin-in-star-wars-visions-2021.jpg',
+            'id' => 1,
+          ],
+        ],
+      ],
+      [
         '#type' => 'table',
         '#header' => $header,
         '#rows' => $data,
         '#sticky' => TRUE,
       ],
       $dbData,
-      $this->element(),
     ];
 
   }
-
-  public function element(): array {
-    $element = [];
-
-    $element['row'] = [
-      '#type' => 'container',
-      '#attributes' => [
-        'class' => ['container', 'row', 'g-0', 'gap-2'],
-      ],
-    ];
-
-    $element['row']['card_1'] = [
-      '#type' => 'container',
-      '#attributes' => [
-        'class' => ['card', 'w-50', 'col'],
-      ],
-    ];
-
-    $element['row']['card_1']['image'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'image',
-      '#attributes' => [
-        'src' => 'https://cdn.shazoo.ru/c1400x625/636930_hNhMEiD_ronin-in-star-wars-visions-2021.jpg',
-        'width' => 500,
-        'class' => 'card-img-top'
-      ],
-    ];
-
-    $element['row']['card_1']['content'] = [
-      '#type' => 'container',
-      '#attributes' => [
-        'class' => ['card-body'],
-      ],
-    ];
-
-    $element['row']['card_1']['content']['title'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'h2',
-      '#attributes' => [
-        'class' => ['card-title', 'm-0', 'mb-2'],
-      ],
-      '#value' => 'Во втором сезоне Star Wars: Visions будут эпизоды от студий из разных стран мира',
-    ];
-
-    $element['row']['card_1']['content'][] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => 'Первый сезон Star Wars: Visions был антологией короткометражек от именитых мультипликационных студий Японии. Во втором сезоне размах будет глобальным — работы будут представлены от команд из разных концов мира.',
-      '#attributes' => [
-        'class' => ['card-text', 'm-0', 'mb-1'],
-      ],
-    ];
-
-    $element['row']['card_1']['content']['quote'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'blockquote',
-      '#value' => 'Мы хотели сделать из Visions своего рода суббренд, который позволил бы различным авторам реализовывать их уникальное видение. Поэтому второй сезон станет глобальным туром по некоторым из самых интересных анимационных студий со всего мира.',
-      '#attributes' => [
-        'class' => ['card-text', 'm-0', 'my-2'],
-      ],
-    ];
-
-    $element['row']['card_1']['content'][] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => 'Второй сезон Star Wars: Visions выйдет весной следующего года. Первый сезон получился спорным из-за разношерстности эпизодов. Некоторые эпизоды пришлись по душе фанатам, в то время как другие получили крайне низкие оценки. Хотя критики остались довольны.',
-      '#attributes' => [
-        'class' => ['card-text', 'm-0'],
-      ],
-    ];
-
-    $element['row']['card_2'] = $element['row']['card_1'];
-    $element['row']['card_2']['image']['#attributes']['src'] = 'https://cdn.shazoo.ru/c1400x625/636962_CRU8B25_siege.jpg';
-    $element['row']['card_2']['content']['title']['#value'] = 'Подробности следующего сезона и новый оперативник в презентации Rainbow Six Siege';
-    $element['row']['card_2']['content'][0]['#value'] = 'Ubisoft провела презентацию следующего сезона Rainbow Six Siege, который получил подзаголовок Brutal Swarm. Название отсылает к новому оперативнику игры — Гриму, который может управлять роем дронов-насекомых, напоминающих пчел.';
-    $element['row']['card_2']['content'][1]['#value'] = 'Грим обладает также взрывчаткой-клейморой и тремя видами оружия: дробовиком и двумя штурмовыми винтовками. Также в игре появится граната с электромагнитным импульсом и новая карта — Стадион. Также разработчики улучшили кастомизацию оружия, систему бана карт и сделали множество других апдейтов. Название отсылает к новому оперативнику игры — Гриму, который может управлять роем дронов-насекомых, напоминающих пчел.';
-    unset ($element['row']['card_2']['content']['quote']);
-
-    $element['#attached']['library'][] = 'resume/resume-asset';
-
-    return $element;
-  }
-
 }

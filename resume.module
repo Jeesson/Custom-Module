@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function resume_theme($existing, $type, $theme, $path) {
+  return [
+    'resume_card_example' => [
+      'variables' => [
+        'items' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ * Обработчик переменных для первого примера.
+ */
+function template_preprocess_resume_card_example(&$variables) {
+  $date_formatter = \Drupal::service('date.formatter');
+  $variables['date'] = $date_formatter->format(time());
+}
