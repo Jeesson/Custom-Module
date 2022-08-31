@@ -11,6 +11,7 @@ use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ResumeForm extends FormBase {
@@ -47,24 +48,36 @@ class ResumeForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Your First name:'),
       '#required' => TRUE,
+      '#attributes' => [
+        'class' => ['form-control', 'w-50'],
+      ],
     ];
 
     $form['last_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Your Last name:'),
       '#required' => TRUE,
+      '#attributes' => [
+        'class' => ['form-control', 'w-50'],
+      ],
     ];
 
     $form['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Email:'),
       '#required' => TRUE,
+      '#attributes' => [
+        'class' => ['form-control', 'w-50'],
+      ],
     ];
 
     $form['description'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Small description:'),
       '#default_value' => $this->t('Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam.'),
+      '#attributes' => [
+        'class' => ['form-control', 'w-50'],
+      ],
     ];
 
     $form['candidate_dob'] = [
@@ -72,6 +85,10 @@ class ResumeForm extends FormBase {
       '#title' => $this->t('DOB'),
       '#default_value' => date('Y-m-d'),
       '#required' => FALSE,
+      '#attributes' => [
+        'type'=> 'date',
+        'class' => ['form-control', 'date-input', 'w-50'],
+      ],
     ];
 
     $form['candidate_gender'] = [
@@ -81,12 +98,18 @@ class ResumeForm extends FormBase {
         'Male' => $this->t('Male'),
         'Female' => $this->t('Female'),
       ],
+      '#attributes' => [
+        'class' => ['form-control', 'date-input', 'w-50'],
+      ],
     ];
 
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Отправить'),
       '#button_type' => 'primary',
+      '#attributes' => [
+        'class' => ['m-0', 'px-4 py-2'],
+      ],
 //      '#ajax' => [
 //        'callback' => '::setMessage',
 //      ],

@@ -10,6 +10,10 @@ function resume_theme($existing, $type, $theme, $path) {
         'items' => [],
       ],
     ],
+    'field__resume_type' => [
+      'render element' => 'content',
+      'file' => 'theme/example.theme.inc'
+    ],
   ];
 }
 
