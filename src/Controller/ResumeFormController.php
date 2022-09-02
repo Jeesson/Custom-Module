@@ -147,27 +147,11 @@ class ResumeFormController extends ControllerBase
     return [
       [
         '#type' => 'html_tag',
-        '#tag' => 'code',
+        '#tag' => 'div',
         '#attributes' => [
           'class' => ['card', 'card-body mb-2']
         ],
-        '#value' => $this->infoDecorator2->getRandInfo(),
-      ],
-      [
-        '#type' => 'html_tag',
-        '#tag' => 'code',
-        '#attributes' => [
-          'class' => ['card', 'card-body mb-2']
-        ],
-        '#value' => $this->infoDecorator->getRandInfo(),
-      ],
-      [
-        '#type' => 'html_tag',
-        '#tag' => 'code',
-        '#attributes' => [
-          'class' => ['card', 'card-body mb-2']
-        ],
-        '#value' => $this->infoService->getRandInfo(),
+        '#value' => $this->infoDecorator2->getRandInfo().$this->infoDecorator->getRandInfo().$this->infoService->getRandInfo(),
       ],
       [
         '#theme' => 'resume_card_example',

@@ -11,8 +11,8 @@ function resume_theme($existing, $type, $theme, $path) {
       ],
     ],
     'field__resume_type' => [
-      'render element' => 'content',
-      'file' => 'theme/example.theme.inc'
+      'template' => 'field--resume-type',
+      'base hook' => 'field'
     ],
   ];
 }
