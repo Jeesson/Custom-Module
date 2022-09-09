@@ -1,0 +1,44 @@
+{{ attach_library('resume/resume-asset') }}
+
+<div class="card">
+  <div class="card-header">
+    <span class="w-100">Новый шаблон</span>
+  </div>
+  <div class="card-body">
+    <div class="row row-cols-2 g-2">
+      {{ form.form_build_id }}
+      {{ form.form_token }}
+      {{ form.form_id }}
+
+      <div class="col-12 col-lg-4">
+        {{ form.first_name }}
+      </div>
+
+      <div class="col-12 col-lg-4">
+        {{ form.last_name }}
+      </div>
+
+      <div class="col-12 col-lg-4">
+        {{ form.email }}
+      </div>
+
+      <div class="col-12">
+        {{ form.description }}
+      </div>
+
+      <div class="col">
+        {{ form.candidate_dob }}
+      </div>
+
+      <div class="col">
+        {{ form.candidate_gender }}
+      </div>
+      <div class="col-12">
+        {{ form.actions }}
+      </div>
+
+    </div>
+    {#    {{ dump(form) }}#}
+  </div>
+
+</div>

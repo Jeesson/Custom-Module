@@ -49,7 +49,7 @@ class ResumeForm extends FormBase {
       '#title' => $this->t('Your First name:'),
       '#required' => TRUE,
       '#attributes' => [
-        'class' => ['form-control', 'w-50'],
+        'class' => ['form-control', 'm-0'],
       ],
     ];
 
@@ -58,7 +58,7 @@ class ResumeForm extends FormBase {
       '#title' => $this->t('Your Last name:'),
       '#required' => TRUE,
       '#attributes' => [
-        'class' => ['form-control', 'w-50'],
+        'class' => ['form-control', 'm-0'],
       ],
     ];
 
@@ -67,7 +67,7 @@ class ResumeForm extends FormBase {
       '#title' => $this->t('Email:'),
       '#required' => TRUE,
       '#attributes' => [
-        'class' => ['form-control', 'w-50'],
+        'class' => ['form-control', 'm-0'],
       ],
     ];
 
@@ -76,7 +76,7 @@ class ResumeForm extends FormBase {
       '#title' => $this->t('Small description:'),
       '#default_value' => $this->t('Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam.'),
       '#attributes' => [
-        'class' => ['form-control', 'w-50'],
+        'class' => ['form-control', 'm-0'],
       ],
     ];
 
@@ -87,7 +87,7 @@ class ResumeForm extends FormBase {
       '#required' => FALSE,
       '#attributes' => [
         'type'=> 'date',
-        'class' => ['form-control', 'date-input', 'w-50'],
+        'class' => ['form-control', 'date-input', 'm-0'],
       ],
     ];
 
@@ -99,7 +99,7 @@ class ResumeForm extends FormBase {
         'Female' => $this->t('Female'),
       ],
       '#attributes' => [
-        'class' => ['form-control', 'date-input', 'w-50'],
+        'class' => ['form-control', 'date-input', 'm-0'],
       ],
     ];
 
@@ -108,7 +108,7 @@ class ResumeForm extends FormBase {
       '#value' => $this->t('Отправить'),
       '#button_type' => 'primary',
       '#attributes' => [
-        'class' => ['m-0', 'px-4 py-2'],
+        'class' => ['m-0', 'px-4', 'py-2', 'w-100'],
       ],
 //      '#ajax' => [
 //        'callback' => '::setMessage',
@@ -123,7 +123,8 @@ class ResumeForm extends FormBase {
 
     // Asset library.
     $form['#attached']['library'][] = 'resume/resume-asset';
-
+    $form['#theme'] = 'resume_form_example';
+//    var_dump($form);
     return $form;
   }
 
